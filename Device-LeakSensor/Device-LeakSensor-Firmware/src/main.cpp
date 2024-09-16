@@ -17,20 +17,20 @@ NodeControllerCore core;
 
 // put function declarations here:
 
-// Function to receive messages
+// Function to send message
 void send_message(uint8_t nodeID, uint16_t messageID, uint64_t data)
 {
-  ifdef debuging
+  #ifdef debuging
   Serial.print("Received message with ID: ");
   Serial.println(messageID, HEX);
   Serial.print("Data: ");
-  for (int i = 0; i < len; i++)
+  for (int i = 0; i < data; i++)
   {
-    Serial.print(data[i], HEX);
-    Serial.print(" ");
+    Serial.print(data);
+    Serial.println(" ");
   }
   Serial.println();
-  endif
+  #endif
 }
 
 // Function to check the leak sensor
@@ -40,17 +40,15 @@ void chkLeakSensor()
   Serial.println(sensorValue);
   if(sensorValue > 1000)
   {
-    core.Send(NODE_ID, LEAK_MESSAGE_ID, 0);
-    ifdef debuging
+    #ifdef debuging
     Serial.println("Leak Detected");
-    endif
+    #endif
   }
   else
   {
-    core.Send(NODE_ID, LEAK_MESSAGE_ID, 1);
-    ifdef debuging
+    #ifdef debuging
     Serial.println("No Leak Detected");
-    endif
+    #endif
   }
 }
 
@@ -60,17 +58,15 @@ void chkLevelSwitch()
   int levelSwitchValue = digitalRead(LEVEL_SWITCH_PIN);
   if(levelSwitchValue == LOW)
   {
-    core.Send(NODE_ID, LEVEL_MESSAGE_ID, 0);
-    ifdef debuging
+    #ifdef debuging
     Serial.println("Level Switch is triggered");
-    endif
+    #endif
   }
   else
   {
-    core.Send(NODE_ID, LEVEL_MESSAGE_ID, 1);
-    ifdef debuging
+    #ifdef debuging
     Serial.println("Level Switch is not triggered");
-    endif
+    #endif
   }
 }
 
@@ -88,7 +84,7 @@ void setup()
   core = NodeControllerCore();
   Serial.println("test");
   // Initialize the node controller core object
-  if (core.Init(receive_message, NODE_ID))
+  if (core.Init(send_message, NODE_ID))
   {
     Serial.println("Driver device initialized");
   }
