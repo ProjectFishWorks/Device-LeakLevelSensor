@@ -1,15 +1,17 @@
 #include <Arduino.h>
 #include <NodeControllerCore.h>
 
-#define NODE_ID 0xA2            // 162
-#define LEAK_MESSAGE_ID 0x0A00 // 2560
-#define LEVEL_MESSAGE_ID 0x0A01  // 2561
+#define NODE_ID 0xB2              // 178
+#define LEAK_DETECTED_MESSAGE_ID 0x0A00    // 2560
+#define HIGH_WATER_LEVEL_MESSAGE_ID 0x0A01   // 2561
 
 #define debuging
 
 #define LEAK_SENSOR_PIN A0
 #define LEVEL_SWITCH_PIN 2
 
+#define MessageDelay 1000
+#define MessageGap 5000
 
 
 // Node controller core object
@@ -50,6 +52,7 @@ void chkLeakSensor()
     Serial.println("No Leak Detected");
     #endif
   }
+  delay(MessageDelay);
 }
 
 // Function to check the level switch
@@ -68,6 +71,7 @@ void chkLevelSwitch()
     Serial.println("Level Switch is not triggered");
     #endif
   }
+  delay(MessageDelay);
 }
 
 void setup() 
@@ -92,13 +96,15 @@ void setup()
   {
     Serial.println("Failed to initialize driver");
   }
+  delay(MessageDelay);
 }
 
 void loop() 
 {
   // put your main code here, to run repeatedly:
-  
-
+  chkLeakSensor();
+  chkLevelSwitch();
+  delay(MessageGap);
 }
 
 // put function definitions here:
