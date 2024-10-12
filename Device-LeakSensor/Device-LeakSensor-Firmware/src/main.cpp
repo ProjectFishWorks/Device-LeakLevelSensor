@@ -68,9 +68,11 @@ xTaskCreate(chkLeakSensor,
 void loop() 
 {
   // put your main code here, to run repeatedly:
+  Serial.println("Sending message");
   chkLeakSensor();
   chkLevelSwitch();
   delay(MessageGap);
+  Serial.println("Sending message");
 }
 
 // put function definitions here:
