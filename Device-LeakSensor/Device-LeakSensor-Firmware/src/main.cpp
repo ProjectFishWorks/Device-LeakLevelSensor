@@ -7,7 +7,7 @@
 
 #define debuging
 
-#define LEAK_SENSOR_PIN A0
+#define LEAK_SENSOR_PIN 4
 #define LEVEL_SWITCH_PIN 2
 
 #define MessageDelay 1000
@@ -20,9 +20,64 @@ NodeControllerCore core;
 // put function declarations here:
 
 // Function to send message
+void send_message(uint8_t nodeID, uint16_t messageID, uint64_t data);
+
+// Function to check the leak sensor
+void chkLeakSensor();
+
+// Function to check the level switch
+void chkLevelSwitch();
+
+
+void setup() 
+{
+  // put your setup code here, to run once:
+
+  // Initialize serial communication
+  Serial.begin(115200);
+  
+  pinMode(LEVEL_SWITCH_PIN, INPUT_PULLUP);
+  pinMode(LEAK_SENSOR_PIN, INPUT);
+
+    // Create the node controller core object
+  core = NodeControllerCore();
+  Serial.println("test");
+  // Initialize the node controller core object
+  if (core.Init(send_message, NODE_ID))
+  {
+    Serial.println("Driver device initialized");
+  }
+  else
+  {
+    Serial.println("Failed to initialize driver");
+  }
+  delay(MessageDelay);
+/*
+xTaskCreate(chkLeakSensor,
+            "chkLeakSensor",
+            10000,
+            NULL,
+            1,
+            NULL
+            );
+*/
+}
+
+
+
+void loop() 
+{
+  // put your main code here, to run repeatedly:
+  chkLeakSensor();
+  chkLevelSwitch();
+  delay(MessageGap);
+}
+
+// put function definitions here:
+
 void send_message(uint8_t nodeID, uint16_t messageID, uint64_t data)
 {
-  #ifdef debuging
+  
   Serial.print("Received message with ID: ");
   Serial.println(messageID, HEX);
   Serial.print("Data: ");
@@ -32,15 +87,17 @@ void send_message(uint8_t nodeID, uint16_t messageID, uint64_t data)
     Serial.println(" ");
   }
   Serial.println();
-  #endif
+  
 }
 
 // Function to check the leak sensor
 void chkLeakSensor()
 {
-  int sensorValue = analogRead(LEAK_SENSOR_PIN);
+  Serial.println("Checking Leak Sensor");
+  int sensorValue = analogReadMilliVolts(LEAK_SENSOR_PIN);
+  
   Serial.println(sensorValue);
-  if(sensorValue > 1000)
+  if(sensorValue > 1)
   {
     #ifdef debuging
     Serial.println("Leak Detected");
@@ -73,38 +130,3 @@ void chkLevelSwitch()
   }
   delay(MessageDelay);
 }
-
-void setup() 
-{
-  // put your setup code here, to run once:
-
-  // Initialize serial communication
-  Serial.begin(115200);
-  
-  pinMode(LEVEL_SWITCH_PIN, INPUT_PULLUP);
-  pinMode(LEAK_SENSOR_PIN, INPUT);
-
-    // Create the node controller core object
-  core = NodeControllerCore();
-  Serial.println("test");
-  // Initialize the node controller core object
-  if (core.Init(send_message, NODE_ID))
-  {
-    Serial.println("Driver device initialized");
-  }
-  else
-  {
-    Serial.println("Failed to initialize driver");
-  }
-  delay(MessageDelay);
-}
-
-void loop() 
-{
-  // put your main code here, to run repeatedly:
-  chkLeakSensor();
-  chkLevelSwitch();
-  delay(MessageGap);
-}
-
-// put function definitions here:
