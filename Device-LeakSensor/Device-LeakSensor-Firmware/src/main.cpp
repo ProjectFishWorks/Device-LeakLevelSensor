@@ -8,15 +8,17 @@
 
 #define debuging
 
-#define LEAK_SENSOR_PIN 1
-#define LEVEL_SWITCH_PIN 2
-#define PUMP_ENABLE_PIN 3
+#define LEAK_SENSOR_PIN 4
+#define LEVEL_SWITCH_PIN 10
+#define PUMP_IN1_PIN 8
+#define PUMP_IN2_PIN 9
 #define PUMP_PWM_PIN 5
 
 #define sendMessageDelay 1000
 #define MessageGap 5000
 
-bool pumpEnabled = 1;
+int pumpEnabled = (PUMP_IN1_PIN == HIGH) && (PUMP_IN2_PIN == LOW);
+int pumpDisabled = (PUMP_IN1_PIN == LOW) && (PUMP_IN2_PIN == LOW);
 
 // Node controller core object
 NodeControllerCore core;
@@ -34,7 +36,9 @@ void chkLevelSwitch();
 
 void pumpControl()
 {
-  pumpEnabled = 1;
+  pumpEnabled;
+  serial.println("Pump is enabled");
+  serial.println(pumpEnabled);
   if (digitalRead(LEVEL_SWITCH_PIN) == LOW)
   {
     analogWrite(PUMP_PWM_PIN, 255);
