@@ -120,7 +120,7 @@ void chkTankLevelSwitch()
 {
   levelSwitchStatus = digitalRead(LEVEL_SWITCH_PIN);
   leakSensorStatus = analogReadMilliVolts(LEAK_SENSOR_PIN);
-  if (levelSwitchStatus == 0 && leakSensorStatus > 50)
+  if (levelSwitchStatus == 0 && leakSensorStatus < 50)
   {
     analogWrite(PUMP_PWM_PIN, minPumpSpeed);
 
@@ -136,7 +136,7 @@ void chkTankLevelSwitch()
     Serial.println("");
 #endif
   }
-  else if(levelSwitchStatus == 1 && leakSensorStatus > 50)
+  else if(levelSwitchStatus == 1 && leakSensorStatus < 50)
   {
     pumpEnabled();
     analogWrite(PUMP_PWM_PIN, maxPumpSpeed);
@@ -159,7 +159,7 @@ void chkTankLevelSwitch()
 void chkLeakSensor()
 {
   leakSensorStatus = analogReadMilliVolts(LEAK_SENSOR_PIN);
-  if (leakSensorStatus < 50)
+  if (leakSensorStatus > 50)
   {
     pumpDisabled();
     analogWrite(PUMP_PWM_PIN, 0);
