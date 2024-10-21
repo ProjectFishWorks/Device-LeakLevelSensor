@@ -4,6 +4,8 @@
 #define NODE_ID 0xB2                       // 178
 #define LEAK_DETECTED_MESSAGE_ID 0x0A00    // 2560
 #define HIGH_WATER_LEVEL_MESSAGE_ID 0x0A01 // 2561
+#define PUMP_MAX_SPEED_MESSAGE_ID 0x0A02   // 2562
+#define PUMP_MIN_SPEED_MESSAGE_ID 0x0A03   // 2563
 #define ALARM_MESSAGE_ID 901               //
 
 #define debuging
@@ -126,7 +128,7 @@ void chkTankLevelSwitch()
 
 #ifdef debuging
     Serial.println("Tank is High");
-    Serial.println("Pump is disabled");
+    Serial.println("Pump is reduced speed");
     Serial.print("pumpIN1   ");
     Serial.print(digitalRead(PUMP_IN1_PIN));
     Serial.print("    pumpIN2  ");
