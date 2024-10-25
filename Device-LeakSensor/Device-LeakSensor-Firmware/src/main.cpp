@@ -41,7 +41,7 @@ void pumpDisabled();
 void chkTankLevelSwitch();
 
 // Function to chk the leak sensor
-void chkLeakSensor();
+//void chkLeakSensor();
 
 void setup()
 {
@@ -86,7 +86,9 @@ void loop()
 
   chkLeakSensor();
   chkTankLevelSwitch();
-  delay(MessageGap);
+  //delay(MessageGap);
+  //digitalWrite(PUMP_IN1_PIN, 1);
+  //digitalWrite(PUMP_IN2_PIN, 1);
 }
 
 // put function definitions here:
@@ -122,23 +124,24 @@ void chkTankLevelSwitch()
 {
   levelSwitchStatus = digitalRead(LEVEL_SWITCH_PIN);
   leakSensorStatus = analogReadMilliVolts(LEAK_SENSOR_PIN);
-  if (levelSwitchStatus == 0 && leakSensorStatus < 50)
+  if (levelSwitchStatus == 1 )//&& leakSensorStatus > 150)
   {
+    pumpEnabled();
     analogWrite(PUMP_PWM_PIN, minPumpSpeed);
 
 #ifdef debuging
     Serial.println("Tank is High");
     Serial.println("Pump is reduced speed");
     Serial.print("pumpIN1   ");
-    Serial.print(digitalRead(PUMP_IN1_PIN));
+    //Serial.print(digitalRead(PUMP_IN1_PIN));
     Serial.print("    pumpIN2  ");
-    Serial.println(digitalRead(PUMP_IN2_PIN));
+    //Serial.println(digitalRead(PUMP_IN2_PIN));
     Serial.print("Leak Sensor =  ");
     Serial.println(leakSensorStatus);
     Serial.println("");
 #endif
   }
-  else if(levelSwitchStatus == 1 && leakSensorStatus < 50)
+  else if(levelSwitchStatus == 1 )//&& leakSensorStatus > 150)
   {
     pumpEnabled();
     analogWrite(PUMP_PWM_PIN, maxPumpSpeed);
@@ -147,9 +150,9 @@ void chkTankLevelSwitch()
     Serial.println("Tank level is normal");
     Serial.println("Pump is enabled");
     Serial.print("pumpIN1   ");
-    Serial.print(digitalRead(PUMP_IN1_PIN));
+    //Serial.print(digitalRead(PUMP_IN1_PIN));
     Serial.print("    pumpIN2   ");
-    Serial.println(digitalRead(PUMP_IN2_PIN));
+    //Serial.println(digitalRead(PUMP_IN2_PIN));
     Serial.print("Leak Sensor =  ");
     Serial.println(leakSensorStatus);
     Serial.println("");
@@ -161,7 +164,7 @@ void chkTankLevelSwitch()
 void chkLeakSensor()
 {
   leakSensorStatus = analogReadMilliVolts(LEAK_SENSOR_PIN);
-  if (leakSensorStatus > 50)
+  if (leakSensorStatus > 150)
   {
     pumpDisabled();
     analogWrite(PUMP_PWM_PIN, 0);
@@ -170,9 +173,9 @@ void chkLeakSensor()
     Serial.println("Leak detected");
     Serial.println("Pump is disabled");
     Serial.print("pumpIN1   ");
-    Serial.print(digitalRead(PUMP_IN1_PIN));
+    //Serial.print(digitalRead(PUMP_IN1_PIN));
     Serial.print("    pumpIN2  ");
-    Serial.println(digitalRead(PUMP_IN2_PIN));
+    //Serial.println(digitalRead(PUMP_IN2_PIN));
     Serial.print("Leak Sensor =  ");
     Serial.println(leakSensorStatus);
     Serial.println("");
@@ -187,9 +190,9 @@ void chkLeakSensor()
     Serial.println("No leaks detected");
     Serial.println("Pump is enabled");
     Serial.print("pumpIN1   ");
-    Serial.print(digitalRead(PUMP_IN1_PIN));
+    //Serial.print(digitalRead(PUMP_IN1_PIN));
     Serial.print("    pumpIN2   ");
-    Serial.println(digitalRead(PUMP_IN2_PIN));
+    //Serial.println(digitalRead(PUMP_IN2_PIN));
     Serial.print("Leak Sensor =  ");
     Serial.println(leakSensorStatus);
     Serial.println("");
