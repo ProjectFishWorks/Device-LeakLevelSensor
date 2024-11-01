@@ -238,7 +238,7 @@ void checkForLevelAlerts(void *parameters)
     {
       if(hasSentHighWaterLevelAlarm1 == 0)
       {
-        //core.sendMessage(HIGH_WATER_1_LEVEL_MESSAGE_ID, (uint64_t)0);
+        core.sendMessage(HIGH_WATER_1_LEVEL_MESSAGE_ID, (uint64_t)0);
         core.sendMessage(HIGH_WATER_1_LEVEL_MESSAGE_ID, &errorData1);
         hasSentHighWaterLevelAlarm1 = 1;
         hasSentNoHighWaterLevelAlarm1 = 0;
@@ -264,7 +264,7 @@ void checkForLevelAlerts(void *parameters)
     {
       if(hasSentHighWaterLevelAlarm2 == 0)
       {
-        //core.sendMessage(HIGH_WATER_2_LEVEL_MESSAGE_ID, (uint64_t)0);
+        core.sendMessage(HIGH_WATER_2_LEVEL_MESSAGE_ID, (uint64_t)0);
         core.sendMessage(HIGH_WATER_2_LEVEL_MESSAGE_ID, &errorData1);
         hasSentHighWaterLevelAlarm2 = 1;
         hasSentNoHighWaterLevelAlarm2 = 0;
@@ -290,7 +290,7 @@ void checkForLevelAlerts(void *parameters)
     {
       if(hasSentHighWaterLevelAlarm3 == 0)
       {
-        //core.sendMessage(HIGH_WATER_3_LEVEL_MESSAGE_ID, (uint64_t)0);
+        core.sendMessage(HIGH_WATER_3_LEVEL_MESSAGE_ID, (uint64_t)0);
         core.sendMessage(HIGH_WATER_3_LEVEL_MESSAGE_ID, &errorData1);
         hasSentHighWaterLevelAlarm3 = 1;
         hasSentNoHighWaterLevelAlarm3 = 0;
@@ -316,7 +316,7 @@ void checkForLevelAlerts(void *parameters)
     {
       if(hasSentHighWaterLevelAlarm4  == 0)
       {
-        //core.sendMessage(HIGH_WATER_4_LEVEL_MESSAGE_ID, (uint64_t)0);
+        core.sendMessage(HIGH_WATER_4_LEVEL_MESSAGE_ID, (uint64_t)0);
         core.sendMessage(HIGH_WATER_4_LEVEL_MESSAGE_ID, &errorData1);
         hasSentHighWaterLevelAlarm4 = 1;
         hasSentNoHighWaterLevelAlarm4 = 0;
@@ -363,7 +363,7 @@ void checkForLeakAlerts(void *parameters){
     {
       if(hasSentLeak1Alarm == 0)
       {
-        //core.sendMessage(LEAK_DETECTED_1_MESSAGE_ID, (uint64_t)0);
+        core.sendMessage(LEAK_DETECTED_1_MESSAGE_ID, (uint64_t)0);
         core.sendMessage(LEAK_DETECTED_1_MESSAGE_ID, &errorData1);
         hasSentLeak1Alarm = 1;
         hasSentNoLeakAlarm1 = 0;
@@ -389,7 +389,7 @@ void checkForLeakAlerts(void *parameters){
     {
       if(hasSentLeak2Alarm == 0)
       {
-        //core.sendMessage(LEAK_DETECTED_2_MESSAGE_ID, (uint64_t)0);
+        core.sendMessage(LEAK_DETECTED_2_MESSAGE_ID, (uint64_t)0);
         core.sendMessage(LEAK_DETECTED_2_MESSAGE_ID, &errorData1);
         hasSentLeak2Alarm = 1;
         hasSentNoLeakAlarm2 = 0;
@@ -415,7 +415,7 @@ void checkForLeakAlerts(void *parameters){
     {
       if(hasSentLeak3Alarm == 0)
       {
-        //core.sendMessage(LEAK_DETECTED_3_MESSAGE_ID, (uint64_t)0);
+        core.sendMessage(LEAK_DETECTED_3_MESSAGE_ID, (uint64_t)0);
         core.sendMessage(LEAK_DETECTED_3_MESSAGE_ID, &errorData1);
         hasSentLeak3Alarm = 1;
         hasSentNoLeakAlarm3 = 0;
@@ -441,7 +441,7 @@ void checkForLeakAlerts(void *parameters){
     {
       if(hasSentLeak4Alarm == 0)
       {
-        //core.sendMessage(LEAK_DETECTED_3_MESSAGE_ID, (uint64_t)0);
+        core.sendMessage(LEAK_DETECTED_3_MESSAGE_ID, (uint64_t)0);
         core.sendMessage(LEAK_DETECTED_4_MESSAGE_ID, &errorData1);
         hasSentLeak4Alarm = 1;
         hasSentNoLeakAlarm4 = 0;
