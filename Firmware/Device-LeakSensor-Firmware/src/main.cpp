@@ -166,11 +166,11 @@ void checkForGlobalAlerts(void *parameters)
 
     int leakSensorStatus1 = analogReadMilliVolts(LEAK_SENSOR_PIN_1);
     Serial.println("Leak Sensor 1 = " + String(leakSensorStatus1));
-    int leakSensorStatus2 = analogReadMilliVolts(LEAK_SENSOR_PIN_2);
+    int leakSensorStatus2 = 0;
     Serial.println("Leak Sensor 2 = " + String(leakSensorStatus2));
-    int leakSensorStatus3 = analogReadMilliVolts(LEAK_SENSOR_PIN_3);
+    int leakSensorStatus3 = 0;
     Serial.println("Leak Sensor 3 = " + String(leakSensorStatus3));
-    int leakSensorStatus4 = analogReadMilliVolts(LEAK_SENSOR_PIN_4);
+    int leakSensorStatus4 = 0;
     Serial.println("Leak Sensor 4 = " + String(leakSensorStatus4));
 
     if (leakSensorStatus1 > LEAK_SENSOR_THRESHOLD || 
@@ -352,11 +352,11 @@ void checkForLeakAlerts(void *parameters){
       
       int leakSensorStatus1 = analogReadMilliVolts(LEAK_SENSOR_PIN_1);
       Serial.println("Leak Sensor 1 = " + String(leakSensorStatus1));
-      int leakSensorStatus2 = analogReadMilliVolts(LEAK_SENSOR_PIN_2);
+      int leakSensorStatus2 = 0;
       Serial.println("Leak Sensor 2 = " + String(leakSensorStatus2));
-      int leakSensorStatus3 = analogReadMilliVolts(LEAK_SENSOR_PIN_3);
+      int leakSensorStatus3 = 0;
       Serial.println("Leak Sensor 3 = " + String(leakSensorStatus3));
-      int leakSensorStatus4 = analogReadMilliVolts(LEAK_SENSOR_PIN_4);
+      int leakSensorStatus4 = 0;
       Serial.println("Leak Sensor 4 = " + String(leakSensorStatus4));
 
       if (leakSensorStatus1 > LEAK_SENSOR_THRESHOLD)

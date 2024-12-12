@@ -5,6 +5,12 @@ Node device for sensing water leaks and tank level. It supports four inputs of a
 
 All four plugs are wired for both a leak sensors and a float switch. The analog input on the leak sensor is pulled low so that if no leak sensor is connected, the input will read 0 volts(no leak).
 
+![alt text](Pictures/Node.jpg)
+
+![alt text](<Pictures/Leak Sensor.jpg>)
+
+![alt text](Pictures/FloatSwitch.jpg)
+
 ![alt text](Pictures/Schematic.jpg)
 
 ## Firmware
