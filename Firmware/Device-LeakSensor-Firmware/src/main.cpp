@@ -6,10 +6,10 @@
 #define updateInterval 2000 // Frequency of sending messages
 
 #define NODE_ID 163   // 0xA3 Node ID in Hex  
-#define LEAK_SENSOR1_SENSITIVITY_MESAGE_ID 2956 // 0xB8C
-#define LEAK_SENSOR2_SENSITIVITY_MESAGE_ID 2957 // 0xB8D
-#define LEAK_SENSOR3_SENSITIVITY_MESAGE_ID 2958 // 0xB8E
-#define LEAK_SENSOR4_SENSITIVITY_MESAGE_ID 2959 // 0xB8F
+#define LEAK_SENSOR1_SENSITIVITY_MESAGE_ID 2556 // 0xA04
+#define LEAK_SENSOR2_SENSITIVITY_MESAGE_ID 2557 // 0xA05
+#define LEAK_SENSOR3_SENSITIVITY_MESAGE_ID 2558 // 0xA06
+#define LEAK_SENSOR4_SENSITIVITY_MESAGE_ID 2559 // 0xA07
 
 #define LEAK_DETECTED_1_MESSAGE_ID 0x0A01 // 2561
 #define LEAK_DETECTED_2_MESSAGE_ID 0x0A02 // 2562
@@ -156,24 +156,25 @@ void messageReceived(uint8_t nodeID, uint16_t messageID, uint64_t data)
   {
     Serial.println("Message is for this node");
 
+  // Mapped sensitivities from 0 being less sensitive to 100 being very sensitive
     if (messageID == LEAK_SENSOR1_SENSITIVITY_MESAGE_ID)
     {
-      leakSensor1Sensitivity = data;
+      leakSensor1Sensitivity = (map(data, 0, 100, 3300, 0));
       Serial.println("Leak Sensor 1 Sensitivity = " + String(leakSensor1Sensitivity));
     }
     else if (messageID == LEAK_SENSOR2_SENSITIVITY_MESAGE_ID)
     {
-      leakSensor2Sensitivity = data;
+      leakSensor2Sensitivity = (map(data, 0, 100, 3300, 0));
       Serial.println("Leak Sensor 2 Sensitivity = " + String(leakSensor2Sensitivity));
     }
     else if (messageID == LEAK_SENSOR3_SENSITIVITY_MESAGE_ID)
     {
-      leakSensor3Sensitivity = data;
+      leakSensor3Sensitivity = (map(data, 0, 100, 3300, 0));
       Serial.println("Leak Sensor 3 Sensitivity = " + String(leakSensor3Sensitivity));
     }
     else if (messageID == LEAK_SENSOR4_SENSITIVITY_MESAGE_ID)
     {
-      leakSensor4Sensitivity = data;
+      leakSensor4Sensitivity = (map(data, 0, 100, 3300, 0));
       Serial.println("Leak Sensor 4 Sensitivity = " + String(leakSensor4Sensitivity));
     }
   }
