@@ -1,8 +1,11 @@
 #include <Arduino.h>
 #include <NodeControllerCore.h>
 
-#define NODE_ID 0xB2 // 178
+#define debuging  // Comment this line to remove debug messages
 
+#define updateInterval 2000 // Frequency of sending messages
+
+#define NODE_ID 163   // 0xA3 Node ID in Hex  
 #define LEAK_SENSOR1_SENSITIVITY_MESAGE_ID 2956 // 0xB8C
 #define LEAK_SENSOR2_SENSITIVITY_MESAGE_ID 2957 // 0xB8D
 #define LEAK_SENSOR3_SENSITIVITY_MESAGE_ID 2958 // 0xB8E
@@ -20,8 +23,6 @@
 
 #define ALARM_MESSAGE_ID 901
 
-#define debuging
-
 #define LEAK_SENSOR_PIN_1 0
 #define LEAK_SENSOR_PIN_2 1
 #define LEAK_SENSOR_PIN_3 2
@@ -31,8 +32,6 @@
 #define LEVEL_SWITCH_PIN_2 5
 #define LEVEL_SWITCH_PIN_3 8
 #define LEVEL_SWITCH_PIN_4 9
-
-#define updateInterval 2000
 
 int leakSensor1Sensitivity = 100;
 int leakSensor2Sensitivity = 100;
